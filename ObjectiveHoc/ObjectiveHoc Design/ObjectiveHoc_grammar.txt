@@ -1,0 +1,47 @@
+<real_number>      ::= <significand> <exponent_part>
+<significand>      ::= <integer_part> '.' <fractional_part> | '.' <fractional_part> | <integer_part>
+<integer_part>     ::= <digit> | <digit> <integer_part>
+<fractional_part>  ::= <digit> | <digit> <fractional_part>
+<exponent_part>    ::= ('e' | 'E') <exponent_sign> <exponent_value>
+<exponent_sign>    ::= '+' | '-'
+<exponent_value>   ::= <digit> | <digit> <exponent_value>
+<digit>            ::= '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'
+
+<procname> ::= <identifier>
+<funcname> ::= <identifier>
+<identifier> ::= (<letter> | '_') ( <letter> | <digit> | '_' )*
+<letter> ::= 'A' | 'B' | ... | 'Z'| 'a' | 'b' | ... | 'z'
+<string> ::= ( 'ASCII0'|...|'ASCII255' )*
+
+<start> ::= <stmtlist> eof
+<stmtlist> ::= <stmt> ('\n'|'\r'|'\n''\r') <stmtlist> | end
+<stmt> ::= <assign_stmt> | <while_stmt> | <if_stmt> | <print_stmt> | <read_stmt> | <procdef_stmt> | <proccall_stmt> | <funcdef_stmt> | <return_stmt>
+<assign_stmt> ::= <l_variable> = <expr> | <l_variable> = <string>
+<while_stmt> ::= while ( <cond_expr> ) stmt | while ( <cond_expr> ) { <stmtlist> }
+<if_stmt> ::= if ( <cond_expr> ) stmt | if ( <cond_expr> ) { <stmtlist> }
+<if_stmt> ::= if ( <cond_expr> ) stmt <if_else> | if ( <cond_expr> ) { <stmtlist> } <if_else>
+<if_else> ::= else <stmt> | else { <stmt_list> }
+<print_stmt> ::= print <exprlist>
+<expr_list> ::= <expr> ',' <expr_list> | <expr>   
+<read_stmt> ::= read ( <l_variable> )
+<procdef_stmt> ::= proc <procname> () stmt | proc <procname> () { <stmtlist> }
+<proccall_stmt> ::= <procname> ( <arg_list> )
+<funcdef_stmt> ::= func <funcname> () stmt | func <funcname> () { <stmtlist> }
+<funccall> ::= <funcname> ( <arg_list> )
+<return_stmt> ::= return | return <expr>
+<cond_expr> :: = <comp_expr> | <cond_expr> && <comp_expr> | <cond_expr> || <comp_expr>
+<comp_expr> ::= <expr> | <expr> < <expr> | <expr> <= <expr> | <expr> == <expr> | <expr> != <expr> | <expr> > <expr> | <expr> >= <expr>
+<expr> ::= <term> | <expr> + <term> | <expr> - <term>
+<term> ::= <expo_term> | <term> * <expo_term> | <term> / <expo_term>
+<expo_term> ::= <factor> | <expo_term> ^ <factor>
+<factor> ::= ( <cond_expr> ) | <real_number> | <r_variable> | <bltin_var> | <bltin> | <funccall>
+<factor> ::= '-' <factor>
+<factor> ::= '!' <cond_expr>
+<factor> ::= <arg>
+<arg> ::= '$' ( <digit> )*
+<l_variable> ::= <identifier>
+<r_variable> ::= <identifier>
+<bltin_var> ::= <identifier>
+<bltin> ::= <bltin_name> '(' <arg_list> ')'
+<arg_list> ::= <expr> ',' <arg_list> | <expr> |   
+<bltin_name> ::= 'abs' | 'atan' | 'cos' | 'exp' | 'int' | 'log' | 'log10' | 'sin' | 'sqrt'
