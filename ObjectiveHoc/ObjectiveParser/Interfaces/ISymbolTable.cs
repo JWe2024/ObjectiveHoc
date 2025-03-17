@@ -42,6 +42,7 @@
             Function,
             Return,
             Read,
+            CtrlE,
             EOF
         }
 
