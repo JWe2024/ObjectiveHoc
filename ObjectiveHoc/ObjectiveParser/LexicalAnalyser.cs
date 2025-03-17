@@ -147,7 +147,16 @@ namespace Parser
             }
             else
             {
-                return input.Read();
+                int c = input.Peek();
+
+                if (c == 5)
+                {
+                    return c;
+                }
+                else
+                {
+                    return input.Read();
+                }
             }
         }
 

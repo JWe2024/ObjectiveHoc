@@ -129,6 +129,9 @@ namespace Parser
                 { "func", new Token(ISymbolTable.TokenType.FuncDef, "funcdef") },
                 { "proc", new Token(ISymbolTable.TokenType.ProcDef, "procdef") },
                 { "return", new Token(ISymbolTable.TokenType.Return, "return") },
+
+                //ctrl + E for if statemate, no else
+                { "\u0005", new Token(ISymbolTable.TokenType.CtrlE, "ctrlE") },
             };
 
             identifierMap = new Dictionary<string, ISymbolTable.SemanticAction>
